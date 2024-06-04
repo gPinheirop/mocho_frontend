@@ -1,10 +1,10 @@
-import './App.css'
+import LoginScreen from "./member/screens/LoginScreen"
 
 function App() {
 
   return (
     <>
-      
+      <LoginScreen />
     </>
   )
 }
