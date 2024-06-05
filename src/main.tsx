@@ -6,10 +6,14 @@ import LoginScreen from "./member/screens/LoginScreen/index.tsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <LoginScreen />
+    path: "/",
+    element: <LoginScreen />,
   },
-])
+  // {
+  //   path: "home",
+  //   element:
+  // },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
