@@ -1,4 +1,4 @@
-.login-container{
+/* .login-container{
     display: flex;
     flex-direction: column;
     padding: 40px;
@@ -7,6 +7,11 @@
     background: rgba(255, 255, 255, 0.00);
     max-width: fit-content;
     max-height: fit-content;
+} */
+.login-container {
+    border-radius: 30px;
+    border: 1px solid rgba(0, 0, 0, 0.10);
+    background: rgba(255, 255, 255, 0.00);
 }
 .logo{
     margin: 0 24px 24px 24px;
@@ -19,5 +24,5 @@
     border-radius: 8px;
 }
 .login-buttton {
-
+    cursor: pointer !important;
 }
