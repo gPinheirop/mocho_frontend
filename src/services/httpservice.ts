@@ -3,10 +3,10 @@ import axios, {
   AxiosError,
   RawAxiosResponseHeaders,
 } from "axios";
-import { useStore } from "@/store";
+import { useStore } from "../store";
 
 export const api = axios.create({
-  baseURL: "add your backend base url here",
+  baseURL: "http://localhost:3000",
 });
 
 type Params = {
@@ -46,26 +46,26 @@ export const getHttpHeaders = {
 };
 
 export async function httpRequest<T, E = unknown>({
-    method,
-    url,
-    body,
-    headers,
-  }: Params): Promise<HttpResponse<T, E>> {
-    try {
-      const response = await api<T>({method, url, data: body, headers});
+  method,
+  url,
+  body,
+  headers,
+}: Params): Promise<HttpResponse<T, E>> {
+  try {
+    const response = await api<T>({ method, url, data: body, headers });
 
-      return {
-        hasError: false,
-        data: response.data,
-        headers: response.headers,
-      };
-    } catch (error: any) {
-      if (error.response.data.code === 'token_not_valid') {
-        useStore.getState().deleteToken();
-      }
-      return {
-        hasError: true,
-        error,
-      };
+    return {
+      hasError: false,
+      data: response.data,
+      headers: response.headers,
+    };
+  } catch (error: any) {
+    if (error.response.data.code === "token_not_valid") {
+      useStore.getState().deleteToken();
     }
+    return {
+      hasError: true,
+      error,
+    };
   }
+}

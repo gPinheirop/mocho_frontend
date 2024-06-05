@@ -4,17 +4,18 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginScreen from "./member/screens/LoginScreen/index.tsx";
 import { Theme } from "@radix-ui/themes";
-import '@radix-ui/themes/styles.css';
+import "@radix-ui/themes/styles.css";
+import HomePage from "./member/screens/HomePage/index.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <LoginScreen />,
   },
-  // {
-  //   path: "home",
-  //   element:
-  // },
+  {
+    path: "/home",
+    element: <HomePage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
