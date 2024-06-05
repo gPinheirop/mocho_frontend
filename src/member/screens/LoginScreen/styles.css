@@ -26,3 +26,7 @@
 .login-buttton {
     cursor: pointer !important;
 }
+
+.alert{
+    color: red;
+}
