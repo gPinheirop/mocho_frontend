@@ -1,4 +1,4 @@
-import { Button, Flex, TextField } from "@radix-ui/themes";
+import { Button, Flex, TextField, Text } from "@radix-ui/themes";
 import logo from "../../../assets/logo.png";
 import "./styles.css";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { useNavigate, redirect } from "react-router-dom";
 function LoginScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [inputError, setInputError] = useState(false);
+  const [error, setError] = useState(false);
 
   const { accessToken, login, deleteToken } = useStore();
   const navigate = useNavigate();
@@ -16,8 +16,10 @@ function LoginScreen() {
   const onLogin = async () => {
     const isSucess = await login(email, password);
     if (isSucess) {
+      setError(false)
       navigate("home");
     }
+    setError(true)
     return null;
   };
 
@@ -34,6 +36,10 @@ function LoginScreen() {
       m={"9"}
     >
       <img className="logo" src={logo} alt="Mocho" />
+      {
+        error &&
+        <Text className="alert">Email ou senha está incorreto</Text>
+      }
       <TextField.Root
         size="2"
         placeholder="Email"
