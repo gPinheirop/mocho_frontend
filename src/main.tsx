@@ -6,15 +6,22 @@ import LoginScreen from "./member/screens/LoginScreen/index.tsx";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import HomePage from "./member/screens/HomePage/index.tsx";
+import App from "./App.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginScreen />,
-  },
-  {
-    path: "/home",
-    element: <HomePage />,
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <LoginScreen />,
+      },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
+    ],
   },
 ]);
 

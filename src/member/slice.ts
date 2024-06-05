@@ -14,6 +14,7 @@ export const createMemberSlice: StateCreator<Store, [], [], MemberSlice> = (
   login: async (email: string, password: string) => {
     set({ loginLoading: true });
     const result = await memberApiService.signIn(email, password);
+    console.log(result);
     if (result.hasError) {
       console.error(result.error.response?.data);
       set({ loginLoading: false });
