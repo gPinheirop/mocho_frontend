@@ -72,4 +72,14 @@ export const createProjectSlice: StateCreator<Store, [], [], ProjectSlice> = (
     }
     return true;
   },
+
+  deleteProject: async (id: string) => {
+    const result = await projectApiService.deleteProject(id);
+    console.log(result);
+    if (result.hasError) {
+      console.error(result.error.response?.data);
+      return false;
+    }
+    return true;
+  },
 });

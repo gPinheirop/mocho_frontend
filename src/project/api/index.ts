@@ -55,6 +55,16 @@ class ProjectApiService {
       headers,
     });
   }
+
+  async deleteProject(id: string) {
+    const headers = await getHttpHeaders.withAuthToken();
+    type Response = { access: string; refresh: string };
+    return await httpRequest<Response, Error>({
+      method: "DELETE",
+      url: `/projects/${id}`,
+      headers,
+    });
+  }
 }
 
 export const projectApiService = new ProjectApiService();

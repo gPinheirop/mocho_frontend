@@ -3,17 +3,21 @@ export interface ProjectSlice {
   getAllProjects: () => Promise<void>;
   project: Project | null;
   getProject: (id: string) => Promise<boolean>;
+
   createProject: (
     name: string,
     objective: string,
     description: string
   ) => Promise<boolean>;
+
   updateProject: (
     name: string,
     objective: string,
     description: string,
     id: string
   ) => Promise<boolean>;
+
+  deleteProject: (id: string) => Promise<boolean>;
 }
 
 interface Project {

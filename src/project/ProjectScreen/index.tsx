@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "../../components/ui/general/Header";
 import { useStore } from "../../store";
 import {
+  AlertDialog,
   Button,
   Dialog,
   Flex,
@@ -20,7 +21,13 @@ function ProjectScreen() {
   const [objective, setObjective] = useState("");
   const [description, setDescription] = useState("");
 
-  const { getAllProjects, projects, createProject, updateProject } = useStore();
+  const {
+    getAllProjects,
+    projects,
+    createProject,
+    updateProject,
+    deleteProject,
+  } = useStore();
   const navigate = useNavigate();
 
   const handleCreateProject = async () => {
@@ -42,6 +49,15 @@ function ProjectScreen() {
       } else {
         console.error("erro durante o atualização do projeto");
       }
+    }
+  };
+
+  const handleDeleteProject = async (id: string) => {
+    const isSucess = await deleteProject(id);
+    if (isSucess) {
+      getAllProjects();
+    } else {
+      console.error("erro durante a destruição do projeto");
     }
   };
 
@@ -151,7 +167,7 @@ function ProjectScreen() {
                     </Dialog.Trigger>
 
                     <Dialog.Content maxWidth="450px">
-                      <Dialog.Title>Editar projetos</Dialog.Title>
+                      <Dialog.Title>Editar projeto</Dialog.Title>
                       <Dialog.Description size="2" mb="4">
                         Atualize seu projeto
                       </Dialog.Description>
@@ -163,6 +179,7 @@ function ProjectScreen() {
                           </Text>
                           <TextField.Root
                             placeholder="Nome do projeto"
+                            defaultValue={project.name}
                             onChange={(e) => {
                               setName(e.target.value);
                             }}
@@ -173,6 +190,7 @@ function ProjectScreen() {
                             Objetivo
                           </Text>
                           <TextField.Root
+                            defaultValue={project.objective}
                             placeholder="Objetivo"
                             onChange={(e) => {
                               setObjective(e.target.value);
@@ -184,6 +202,7 @@ function ProjectScreen() {
                             Descrição
                           </Text>
                           <TextArea
+                            defaultValue={project.description}
                             placeholder="Descrição"
                             onChange={(e) => {
                               setDescription(e.target.value);
@@ -213,12 +232,36 @@ function ProjectScreen() {
                   </Dialog.Root>
                 </Table.Cell>
                 <Table.Cell>
-                  <TrashIcon
-                    onClick={() => {
-                      console.log("teste");
-                    }}
-                    className="project-name"
-                  />
+                  <AlertDialog.Root>
+                    <AlertDialog.Trigger>
+                      <TrashIcon className="project-name" />
+                    </AlertDialog.Trigger>
+                    <AlertDialog.Content maxWidth="450px">
+                      <AlertDialog.Title>Deletar projeto?</AlertDialog.Title>
+                      <AlertDialog.Description size="2">
+                        {`Tem certeza que deseja deletar ${project.name}? Uma vez feito, este registro não pode ser recuperado!`}
+                      </AlertDialog.Description>
+
+                      <Flex gap="3" mt="4" justify="end">
+                        <AlertDialog.Cancel>
+                          <Button variant="soft" color="gray">
+                            Cancelar
+                          </Button>
+                        </AlertDialog.Cancel>
+                        <AlertDialog.Action>
+                          <Button
+                            variant="solid"
+                            color="red"
+                            onClick={() => {
+                              handleDeleteProject(project.id);
+                            }}
+                          >
+                            Deletar
+                          </Button>
+                        </AlertDialog.Action>
+                      </Flex>
+                    </AlertDialog.Content>
+                  </AlertDialog.Root>
                 </Table.Cell>
               </Table.Row>
             ))}
