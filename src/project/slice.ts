@@ -52,4 +52,24 @@ export const createProjectSlice: StateCreator<Store, [], [], ProjectSlice> = (
     }
     return true;
   },
+
+  updateProject: async (
+    name: string,
+    objective: string,
+    description: string,
+    id: string
+  ) => {
+    const result = await projectApiService.updateProject(
+      name,
+      objective,
+      description,
+      id
+    );
+    console.log(result);
+    if (result.hasError) {
+      console.error(result.error.response?.data);
+      return false;
+    }
+    return true;
+  },
 });

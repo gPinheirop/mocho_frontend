@@ -8,6 +8,12 @@ export interface ProjectSlice {
     objective: string,
     description: string
   ) => Promise<boolean>;
+  updateProject: (
+    name: string,
+    objective: string,
+    description: string,
+    id: string
+  ) => Promise<boolean>;
 }
 
 interface Project {

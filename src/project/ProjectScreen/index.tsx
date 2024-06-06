@@ -16,13 +16,11 @@ import "./styles.css";
 import { Pencil1Icon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 
 function ProjectScreen() {
-  const [isOpen, setIsopen] = useState(false);
-
   const [name, setName] = useState("");
   const [objective, setObjective] = useState("");
   const [description, setDescription] = useState("");
 
-  const { getAllProjects, projects, createProject } = useStore();
+  const { getAllProjects, projects, createProject, updateProject } = useStore();
   const navigate = useNavigate();
 
   const handleCreateProject = async () => {
@@ -32,6 +30,17 @@ function ProjectScreen() {
         getAllProjects();
       } else {
         console.error("erro durante o salvamento do projeto");
+      }
+    }
+  };
+
+  const handleUpdateProject = async (id: string) => {
+    if (name || objective || description) {
+      const isSucess = await updateProject(name, objective, description, id);
+      if (isSucess) {
+        getAllProjects();
+      } else {
+        console.error("erro durante o atualização do projeto");
       }
     }
   };
@@ -56,7 +65,7 @@ function ProjectScreen() {
           <Dialog.Content maxWidth="450px">
             <Dialog.Title>Crie um novo projeto</Dialog.Title>
             <Dialog.Description size="2" mb="4">
-              Documente seu projeto
+              Crie seu projeto
             </Dialog.Description>
 
             <Flex direction="column" gap="3">
@@ -136,12 +145,72 @@ function ProjectScreen() {
                 <Table.Cell>{project.objective}</Table.Cell>
                 <Table.Cell>{project.description}</Table.Cell>
                 <Table.Cell>
-                  <Pencil1Icon
-                    onClick={() => {
-                      console.log("teste");
-                    }}
-                    className="project-name"
-                  />
+                  <Dialog.Root>
+                    <Dialog.Trigger>
+                      <Pencil1Icon className="project-name" />
+                    </Dialog.Trigger>
+
+                    <Dialog.Content maxWidth="450px">
+                      <Dialog.Title>Editar projetos</Dialog.Title>
+                      <Dialog.Description size="2" mb="4">
+                        Atualize seu projeto
+                      </Dialog.Description>
+
+                      <Flex direction="column" gap="3">
+                        <label>
+                          <Text as="div" size="2" mb="1" weight="bold">
+                            Nome do projeto
+                          </Text>
+                          <TextField.Root
+                            placeholder="Nome do projeto"
+                            onChange={(e) => {
+                              setName(e.target.value);
+                            }}
+                          />
+                        </label>
+                        <label>
+                          <Text as="div" size="2" mb="1" weight="bold">
+                            Objetivo
+                          </Text>
+                          <TextField.Root
+                            placeholder="Objetivo"
+                            onChange={(e) => {
+                              setObjective(e.target.value);
+                            }}
+                          />
+                        </label>
+                        <label>
+                          <Text as="div" size="2" mb="1" weight="bold">
+                            Descrição
+                          </Text>
+                          <TextArea
+                            placeholder="Descrição"
+                            onChange={(e) => {
+                              setDescription(e.target.value);
+                            }}
+                          />
+                        </label>
+                      </Flex>
+
+                      <Flex gap="3" mt="4" justify="end">
+                        <Dialog.Close>
+                          <Button variant="soft" color="gray">
+                            Cancelar
+                          </Button>
+                        </Dialog.Close>
+                        <Dialog.Close>
+                          <Button
+                            className="project-name"
+                            onClick={() => {
+                              handleUpdateProject(project.id);
+                            }}
+                          >
+                            Salvar
+                          </Button>
+                        </Dialog.Close>
+                      </Flex>
+                    </Dialog.Content>
+                  </Dialog.Root>
                 </Table.Cell>
                 <Table.Cell>
                   <TrashIcon
@@ -155,14 +224,6 @@ function ProjectScreen() {
             ))}
           </Table.Body>
         </Table.Root>
-        {isOpen && (
-          <Flex direction={"column"}>
-            <Heading>Criar projeto</Heading>
-            <TextField.Root placeholder="Nome do projeto"></TextField.Root>
-            <TextField.Root placeholder="Descrição do projeto"></TextField.Root>
-            <TextField.Root placeholder="Objetivo do projeto"></TextField.Root>
-          </Flex>
-        )}
       </Flex>
     </>
   );
