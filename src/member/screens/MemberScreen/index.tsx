@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Header from "../../components/ui/general/Header";
-import { useStore } from "../../store";
+import Header from "../../../components/ui/general/Header";
+import { useStore } from "../../../store";
 import {
   AlertDialog,
   Button,
@@ -13,10 +13,10 @@ import {
   TextField,
 } from "@radix-ui/themes";
 import { Link, useNavigate } from "react-router-dom";
-import "./styles.css";
+import "./style.css";
 import { Pencil1Icon, PlusIcon, TrashIcon } from "@radix-ui/react-icons";
 
-function ProjectScreen() {
+function MemberScreen() {
   const [name, setName] = useState("");
   const [objective, setObjective] = useState("");
   const [description, setDescription] = useState("");
@@ -279,4 +279,4 @@ function ProjectScreen() {
   );
 }
 
-export default ProjectScreen;
+export default MemberScreen;

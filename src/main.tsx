@@ -8,6 +8,7 @@ import "@radix-ui/themes/styles.css";
 import App from "./App.tsx";
 import ProjectScreen from "./project/ProjectScreen/index.tsx";
 import ProjectPage from "./project/ProjectPage/index.tsx";
+import MemberScreen from "./member/screens/MemberScreen/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/projects/:id",
         element: <ProjectPage />,
       },
+      {
+        path: "members",
+        element: <MemberScreen />
+      }
     ],
   },
 ]);

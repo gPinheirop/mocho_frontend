@@ -1,3 +1,5 @@
+import { Member } from "../member/types";
+
 export interface ProjectSlice {
   projects: Array<Project>;
   getAllProjects: () => Promise<void>;
@@ -27,5 +29,6 @@ interface Project {
   created_at: Date;
   updated_at: Date;
   deleted_at: null;
+  member: Array<Member>;
   id: string;
 }

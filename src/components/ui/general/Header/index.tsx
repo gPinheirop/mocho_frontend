@@ -1,7 +1,7 @@
 import { Box, Button, DropdownMenu, Flex } from "@radix-ui/themes";
 import logo from "../../../../assets/logo.png";
 import "./styles.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
@@ -18,7 +18,11 @@ function Header() {
             </Button>
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
-            <DropdownMenu.Item onClick={() => {}}>Projetos</DropdownMenu.Item>
+            <DropdownMenu.Item>
+              <Link to={"/projects"} className="header-link">
+                Projetos
+              </Link>
+            </DropdownMenu.Item>
             <DropdownMenu.Separator />
 
             <DropdownMenu.Sub>
@@ -32,6 +36,11 @@ function Header() {
             </DropdownMenu.Sub>
 
             <DropdownMenu.Separator />
+            <DropdownMenu.Item>
+              <Link to={"/members"} className="header-link">
+                Membros
+              </Link>
+            </DropdownMenu.Item>
             <DropdownMenu.Item>Perfil</DropdownMenu.Item>
             <DropdownMenu.Separator />
             <DropdownMenu.Item color="red">Logout</DropdownMenu.Item>
