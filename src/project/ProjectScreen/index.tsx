@@ -54,9 +54,9 @@ function ProjectScreen() {
           </Dialog.Trigger>
 
           <Dialog.Content maxWidth="450px">
-            <Dialog.Title>Edit profile</Dialog.Title>
+            <Dialog.Title>Crie um novo projeto</Dialog.Title>
             <Dialog.Description size="2" mb="4">
-              Make changes to your profile.
+              Documente seu projeto
             </Dialog.Description>
 
             <Flex direction="column" gap="3">

@@ -19,10 +19,6 @@ function Header() {
           </DropdownMenu.Trigger>
           <DropdownMenu.Content>
             <DropdownMenu.Item onClick={() => {}}>Projetos</DropdownMenu.Item>
-            <DropdownMenu.Item onClick={() => {}}>Membros</DropdownMenu.Item>
-            <DropdownMenu.Item onClick={() => {}}>
-              Tecnologias
-            </DropdownMenu.Item>
             <DropdownMenu.Separator />
 
             <DropdownMenu.Sub>
