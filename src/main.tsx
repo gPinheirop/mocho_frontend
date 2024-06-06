@@ -5,8 +5,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginScreen from "./member/screens/LoginScreen/index.tsx";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
-import HomePage from "./member/screens/HomePage/index.tsx";
 import App from "./App.tsx";
+import ProjectScreen from "./project/ProjectScreen/index.tsx";
+import ProjectPage from "./project/ProjectPage/index.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,12 @@ const router = createBrowserRouter([
         element: <LoginScreen />,
       },
       {
-        path: "/home",
-        element: <HomePage />,
+        path: "projects",
+        element: <ProjectScreen />,
+      },
+      {
+        path: "/projects/:id",
+        element: <ProjectPage />,
       },
     ],
   },

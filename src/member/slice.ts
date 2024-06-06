@@ -21,7 +21,7 @@ export const createMemberSlice: StateCreator<Store, [], [], MemberSlice> = (
       return false;
     }
     set({
-      accessToken: result.data.access,
+      accessToken: result.data.access_token,
       loginLoading: false,
     });
     return true;
