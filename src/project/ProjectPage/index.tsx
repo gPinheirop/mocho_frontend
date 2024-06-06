@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Header from "../../components/ui/general/Header";
 import { useStore } from "../../store";
-import { Flex, Heading, Table } from "@radix-ui/themes";
+import { Flex, Heading } from "@radix-ui/themes";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 function ProjectPage() {

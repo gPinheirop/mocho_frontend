@@ -2,7 +2,12 @@ export interface ProjectSlice {
   projects: Array<Project>;
   getAllProjects: () => Promise<void>;
   project: Project | null;
-  getProject: () => Promise<boolean>;
+  getProject: (id: string) => Promise<boolean>;
+  createProject: (
+    name: string,
+    objective: string,
+    description: string
+  ) => Promise<boolean>;
 }
 
 interface Project {
